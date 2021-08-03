@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useLocation, useHistory } from 'react-router';
+
 import { fetchByIdMoviesActors } from '../../helpers/api';
 import nope from '../../image/nope.jpg';
 import Error from '../../components/Errors/Errors';
@@ -8,6 +9,9 @@ function Cast() {
   const { moviesId } = useParams();
   const [actors, setActors] = useState([]);
   const [status, setStatus] = useState('pending');
+  const location = useLocation();
+  const history = useHistory();
+
   useEffect(() => {
     (async () => {
       try {

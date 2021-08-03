@@ -1,16 +1,16 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { fetchOnSearch } from '../../helpers/api';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Error from '../../components/Errors/Errors';
 import Form from '../../components/Form';
 import Spinner from '../../components/Spinner/Spinner';
-const Cards = lazy(() =>
-  import(`../../components/Cards` /*webpackChunkName: 'Cards'*/),
-);
 
 function MoviesView() {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('pending');
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     if (search === '') {
@@ -39,19 +39,33 @@ function MoviesView() {
     setSearch(ev.target.searchFilm.value);
   }
 
+  const onGoBack = () => {
+    history.push(location?.state?.from ?? '/');
+  };
+
   return (
     <>
+      {location.pathname !== '/' && (
+        <button type="button" onClick={onGoBack}>
+          BACK
+        </button>
+      )}
       <Form onSubmit={onSubmit} />
       <ul>
         {status === 'resolved' &&
           movies.map(({ title, original_name, id }) => (
             <Suspense key={id} fallback={<Spinner />}>
-              <Cards
-                title={title}
-                originalName={original_name}
-                id={id}
-                key={id}
-              />
+              <li>
+                <Link
+                  key={id}
+                  to={{
+                    pathname: `/movies/${id}`,
+                    state: { from: location, label: 'Back to the list' },
+                  }}
+                >
+                  {title ?? original_name}
+                </Link>
+              </li>
             </Suspense>
           ))}
         {status === 'error' && <Error />}

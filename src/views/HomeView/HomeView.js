@@ -1,10 +1,9 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import Spinner from '../../components/Spinner/Spinner';
+import { Link } from 'react-router-dom';
 import { fetchByTrending } from '../../helpers/api';
 import NotFind from '../../components/NotFind/NotFind';
-const Cards = lazy(() =>
-  import(`../../components/Cards` /*webpackChunkName: 'CardsView*/),
-);
+
 const Error = lazy(() =>
   import(`../../components/Errors/Errors` /*webpackChunkName: 'Errors*/),
 );
@@ -34,13 +33,12 @@ function HomeView() {
       <Suspense fallback={<Spinner />}>
         {status === 'resolved' && (
           <ul>
-            {listTrendingMovies.map(movie => (
-              <Cards
-                key={movie.id}
-                id={movie.id}
-                originalName={movie.original_name}
-                title={movie.title}
-              />
+            {listTrendingMovies.map(card => (
+              <li key={card.id}>
+                <Link to={`/movies/${card.id}`}>
+                  {card.title ?? card.original_name}
+                </Link>
+              </li>
             ))}
           </ul>
         )}

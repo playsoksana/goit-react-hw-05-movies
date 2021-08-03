@@ -1,14 +1,29 @@
-import { useEffect, useState } from 'react';
-import { Link, useRouteMatch, Route } from 'react-router-dom';
+import { useEffect, useState, lazy, Suspense } from 'react';
+import {
+  Link,
+  useRouteMatch,
+  Route,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import { useParams } from 'react-router';
-import CastView from '../CastView';
-import ReviewsView from '../ReviewsView';
+
 import { fetchByIdMovies } from '../../helpers/api';
 import Error from '../../components/Errors/Errors';
+import styles from './CardView.module.css';
+import Spinner from '../../components/Spinner/Spinner';
+const CastView = lazy(() =>
+  import(`../CastView` /*webpackChunkName: "CastView "*/),
+);
+const ReviewsView = lazy(() =>
+  import(`../ReviewsView` /*webpackChunkName: "ReviewsView "*/),
+);
 
 function CardView() {
   const { url, path } = useRouteMatch();
   const { moviesId } = useParams();
+  const location = useLocation();
+  const history = useHistory();
 
   const [state, setState] = useState(null);
   const [status, setStatus] = useState('pending');
@@ -30,48 +45,79 @@ function CardView() {
     })();
   }, [moviesId]);
 
+  const onGoBack = () => {
+    history.push(location?.state?.from ?? '/');
+  };
+
   return (
     <>
-      {' '}
-      {status === 'resolved' && (
-        <article>
-          <h2>{state.title ? state.title : state.original_name}</h2>
-          <p>{state.release_date.slice(0, 4)}</p>
-
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${state.poster_path}`}
-            alt={state.title ? state.title : state.original_name}
-          ></img>
-          <p>
-            User Score:{' '}
-            {state.vote_average ? state.vote_average : 'no user score  yet'}
-          </p>
-          <p>
-            Description{' '}
-            {state.overview ? state.overview : 'no description  yet'}
-          </p>
-          <p>Genres: {state.genresMovie} </p>
-
-          <h3>Additional information</h3>
-          <ul>
-            <li>
-              <Link to={`${url}/cast`}>Cast</Link>
-            </li>
-            <li>
-              <Link to={`${url}/reviews`}>Reviews</Link>
-            </li>
-          </ul>
-
-          <Route path={`${path}/cast`}>
-            <CastView />
-          </Route>
-
-          <Route path={`${path}/reviews`}>
-            <ReviewsView />
-          </Route>
-        </article>
+      {location.pathname !== '/' && (
+        <button type="button" onClick={onGoBack}>
+          BACK
+        </button>
       )}
-      {status === 'error' && <Error />}
+      <div className={styles.Container}>
+        {' '}
+        {status === 'resolved' && (
+          <article>
+            <img
+              className={styles.Image}
+              src={`https://image.tmdb.org/t/p/w500/${state.poster_path}`}
+              alt={state.title ? state.title : state.original_name}
+            ></img>
+            <div className={styles.Description}>
+              <h2 className={styles.Name}>
+                {state.title ? state.title : state.original_name} (
+                {state.release_date.slice(0, 4)})
+              </h2>
+              <p className={styles.Title}>
+                User Score:{' '}
+                {state.vote_average ? state.vote_average : 'no user score  yet'}
+              </p>
+              <p className={styles.Title}>
+                Description{' '}
+                {state.overview ? state.overview : 'no description  yet'}
+              </p>
+              <p className={styles.Title}>Genres: {state.genresMovie} </p>
+            </div>
+
+            <h3>Additional information</h3>
+            <ul>
+              <li>
+                <Link
+                  to={{
+                    pathname: `${url}/cast`,
+                    state: { from: location?.state?.from ?? `${url}` },
+                  }}
+                >
+                  Cast
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={{
+                    pathname: `${url}/reviews`,
+                    state: { from: location?.state?.from ?? `${url}` },
+                  }}
+                >
+                  Reviews
+                </Link>
+              </li>
+            </ul>
+
+            <Suspense fallback={<Spinner />}>
+              <Route path={`${path}/cast`}>
+                <CastView />
+              </Route>
+
+              <Route path={`${path}/reviews`}>
+                <ReviewsView />
+              </Route>
+            </Suspense>
+          </article>
+        )}
+        {status === 'error' && <Error />}
+      </div>
     </>
   );
 }

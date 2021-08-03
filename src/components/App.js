@@ -1,6 +1,6 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Spinner from '../components/Spinner/Spinner';
 
 const Header = lazy(() =>
@@ -20,26 +20,31 @@ const NotFind = lazy(() =>
 );
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <Suspense fallback={<Spinner />}>
         <Header />
-        <Switch>
-          <Route path="/" exact>
-            {' '}
-            <HomeView />
-          </Route>
-          <Route path="/movies" exact>
-            {' '}
-            <MoviesView />
-          </Route>
-          <Route path="/movies/:moviesId">
-            <CardView />
-          </Route>
-          <Route>
-            <NotFind />
-          </Route>
-        </Switch>
+
+        <div className="section">
+          <Switch>
+            <Route path="/" exact>
+              {' '}
+              <HomeView />
+            </Route>
+            <Route path="/movies" exact>
+              {' '}
+              <MoviesView />
+            </Route>
+            <Route path="/movies/:moviesId">
+              <CardView />
+            </Route>
+            <Route>
+              <NotFind />
+            </Route>
+          </Switch>
+        </div>
       </Suspense>
     </>
   );

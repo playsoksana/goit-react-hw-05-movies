@@ -1,0 +1,28 @@
+.Container {
+  display: flex;
+  margin-bottom: 40px;
+  padding: 30px 15px;
+}
+
+.Image {
+  width: 400px;
+  height: auto;
+}
+
+.Image:hover,
+:focus {
+  transform: scale(1.05);
+}
+
+.Name {
+  margin-bottom: 50px;
+}
+
+.Description {
+  padding: 10px 30px;
+  display: inline-block;
+}
+
+.Title {
+  display: inline-block;
+}

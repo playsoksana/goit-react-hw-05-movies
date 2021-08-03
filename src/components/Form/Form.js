@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styles from './Form.module.css';
 
 const Form = ({ onSubmit }) => {
   const [valueInput, setValueInput] = useState('');
@@ -24,16 +25,19 @@ const Form = ({ onSubmit }) => {
 
   return (
     <>
-      <form onSubmit={onSubmitForm}>
+      <form onSubmit={onSubmitForm} className={styles.Form}>
         <label>
           <input
+            className={styles.Input}
             onChange={onChangeInput}
             type="text"
             name="searchFilm"
             value={valueInput}
           ></input>
         </label>
-        <button type="submit">Search</button>
+        <button className={styles.Button} type="submit">
+          Search
+        </button>
       </form>
 
       <ToastContainer />

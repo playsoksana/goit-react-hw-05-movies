@@ -1,0 +1,38 @@
+.Form {
+  margin-top: 50px;
+}
+
+.Input {
+  width: 200px;
+  padding: 6px 15px;
+  background-color: rgba(38, 59, 119, 0.2);
+  border: 1px solid rgba(38, 59, 119);
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 1px rgba(38, 59, 119);
+  color: aliceblue;
+  text-shadow: aliceblue;
+  outline: none;
+  margin-right: 20px;
+}
+
+::placeholder-shown {
+  color: #fff;
+}
+
+.Button {
+  font-size: 15px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  min-width: 80px;
+  background-color: rgba(38, 59, 119, 0.7);
+  border: 1px solid rgba(38, 59, 119);
+
+  color: rgba(38, 59, 119);
+}
+
+.Button:hover,
+:focus {
+  text-shadow: rgba(38, 59, 119) 1px 1px 1px;
+  box-shadow: inset 1px 1px 1px rgba(38, 59, 119);
+  color: blue;
+}

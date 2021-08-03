@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useLocation, useHistory } from 'react-router';
 import { fetchByIdMoviesReviews } from '../../helpers/api';
 import Error from '../../components/Errors/Errors';
+import styles from './ReviewsView.module.css';
 
 function ReviewsView() {
   const { moviesId } = useParams();
   const [reviews, setReviews] = useState({ author: null, content: null });
   const [status, setStatus] = useState('pending');
+
   useEffect(() => {
     (async () => {
       try {
@@ -35,7 +37,7 @@ function ReviewsView() {
         <ul>
           {reviews.map(({ author, content }, index) => (
             <li key={index}>
-              <p> Author: {author} </p>
+              <p className={styles.Autor}> Author: {author} </p>
               <p> {content}</p>
             </li>
           ))}
