@@ -20,8 +20,6 @@ const NotFind = lazy(() =>
 );
 
 function App() {
-  const location = useLocation();
-
   return (
     <>
       <Suspense fallback={<Spinner />}>
@@ -29,15 +27,13 @@ function App() {
 
         <div className="section">
           <Switch>
-            <Route path="/" exact>
-              {' '}
+            <Route path="/goit-react-hw-05-movies/" exact>
               <HomeView />
             </Route>
-            <Route path="/movies" exact>
-              {' '}
+            <Route path="/goit-react-hw-05-movies/movies" exact>
               <MoviesView />
             </Route>
-            <Route path="/movies/:moviesId">
+            <Route path="/goit-react-hw-05-movies/movies/:moviesId">
               <CardView />
             </Route>
             <Route>

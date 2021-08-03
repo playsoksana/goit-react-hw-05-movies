@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation, useHistory } from 'react-router';
+import { useParams } from 'react-router';
 import { fetchByIdMoviesReviews } from '../../helpers/api';
 import Error from '../../components/Errors/Errors';
 import styles from './ReviewsView.module.css';

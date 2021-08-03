@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { fetchOnSearch } from '../../helpers/api';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Error from '../../components/Errors/Errors';
@@ -31,6 +31,21 @@ function MoviesView() {
     })();
   }, [search]);
 
+  useEffect(() => {
+    if (movies.length) {
+      localStorage.setItem('movies', JSON.stringify(movies));
+    }
+  }, [movies]);
+
+  useEffect(() => {
+    if (localStorage.getItem('movies')?.length > 2) {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+
+      setStatus('resolved');
+      return;
+    }
+  }, []);
+
   function onSubmit(ev) {
     if (ev.target.searchFilm.value === '') {
       return;
@@ -40,12 +55,12 @@ function MoviesView() {
   }
 
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/');
+    history.push(location?.state?.from ?? '/goit-react-hw-05-movies/');
   };
 
   return (
     <>
-      {location.pathname !== '/' && (
+      {location.pathname !== '/goit-react-hw-05-movies/' && (
         <button type="button" onClick={onGoBack}>
           BACK
         </button>
@@ -59,7 +74,7 @@ function MoviesView() {
                 <Link
                   key={id}
                   to={{
-                    pathname: `/movies/${id}`,
+                    pathname: `/goit-react-hw-05-movies/movies/${id}`,
                     state: { from: location, label: 'Back to the list' },
                   }}
                 >

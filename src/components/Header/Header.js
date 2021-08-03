@@ -10,7 +10,7 @@ const Header = () => {
         <ul className={styles.List}>
           <li className={styles.Item}>
             <NavLink
-              to="/"
+              to="/goit-react-hw-05-movies/"
               className={styles.Link}
               activeClassName={styles.Active}
               exact
@@ -21,7 +21,7 @@ const Header = () => {
           <li className={styles.Item}>
             <NavLink
               to={{
-                pathname: '/movies',
+                pathname: '/goit-react-hw-05-movies/movies',
                 state: {
                   from: location,
                 },
@@ -32,7 +32,7 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        <a className={styles.Resource} href="">
+        <a className={styles.Resource} href="https://www.themoviedb.org/">
           Resource link
         </a>
       </nav>
@@ -40,4 +40,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

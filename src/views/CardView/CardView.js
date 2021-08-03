@@ -46,12 +46,12 @@ function CardView() {
   }, [moviesId]);
 
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/');
+    history.push(location?.state?.from ?? '/goit-react-hw-05-movies/');
   };
 
   return (
     <>
-      {location.pathname !== '/' && (
+      {location.pathname !== '/goit-react-hw-05-movies/' && (
         <button type="button" onClick={onGoBack}>
           BACK
         </button>
@@ -87,7 +87,10 @@ function CardView() {
                 <Link
                   to={{
                     pathname: `${url}/cast`,
-                    state: { from: location?.state?.from ?? `${url}` },
+                    state: {
+                      from:
+                        location?.state?.from ?? `/goit-react-hw-05-movies/`,
+                    },
                   }}
                 >
                   Cast
@@ -97,7 +100,10 @@ function CardView() {
                 <Link
                   to={{
                     pathname: `${url}/reviews`,
-                    state: { from: location?.state?.from ?? `${url}` },
+                    state: {
+                      from:
+                        location?.state?.from ?? `/goit-react-hw-05-movies/`,
+                    },
                   }}
                 >
                   Reviews
