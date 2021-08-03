@@ -1,0 +1,8 @@
+.Link:hover,
+:focus {
+  color: blue;
+}
+
+.Active {
+  color: brown;
+}
