@@ -1,12 +1,8 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import Spinner from '../../components/Spinner/Spinner';
 import { Link } from 'react-router-dom';
 import { fetchByTrending } from '../../helpers/api';
-import NotFind from '../../components/NotFind/NotFind';
-
-const Error = lazy(() =>
-  import(`../../components/Errors/Errors` /*webpackChunkName: 'Errors*/),
-);
+import Error from '../../components/Errors/Errors';
 
 function HomeView() {
   const [listTrendingMovies, setListTrendingMovies] = useState(null);
@@ -23,6 +19,7 @@ function HomeView() {
         }
         setStatus('resolved');
       } catch (error) {
+        console.log(error.message);
         setStatus('error');
       }
     })();
@@ -35,7 +32,7 @@ function HomeView() {
           <ul>
             {listTrendingMovies.map(card => (
               <li key={card.id}>
-                <Link to={`/movies/${card.id}`}>
+                <Link to={`/goit-react-hw-05-movies/movies/${card.id}`}>
                   {card.title ?? card.original_name}
                 </Link>
               </li>

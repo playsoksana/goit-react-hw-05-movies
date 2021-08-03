@@ -25,7 +25,7 @@ function Cast() {
         setStatus('error');
       }
     })();
-  }, [moviesId]);
+  }, [moviesId, actors.length]);
 
   return (
     <>

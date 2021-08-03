@@ -1,6 +1,6 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Spinner from '../components/Spinner/Spinner';
 
 const Header = lazy(() =>
