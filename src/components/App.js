@@ -27,10 +27,10 @@ function App() {
 
         <div className="section">
           <Switch>
-            <Route path="/goit-react-hw-05-movies/" exact>
+            <Route exact path="/goit-react-hw-05-movies/">
               <HomeView />
             </Route>
-            <Route path="/goit-react-hw-05-movies/movies" exact>
+            <Route exact path="/goit-react-hw-05-movies/movies">
               <MoviesView />
             </Route>
             <Route path="/goit-react-hw-05-movies/movies/:moviesId">
