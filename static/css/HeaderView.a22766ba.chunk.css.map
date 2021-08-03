@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Header/Header.module.css"],"names":[],"mappings":"AAAA,iCAEE,UACF,CAEA,sBACE,WACF","file":"HeaderView.a22766ba.chunk.css","sourcesContent":[".Link:hover,\n:focus {\n  color: blue;\n}\n\n.Active {\n  color: brown;\n}\n"]}
