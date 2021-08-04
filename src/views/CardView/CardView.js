@@ -1,4 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
+import PropTypes from 'prop-types';
 import {
   Link,
   useRouteMatch,
@@ -12,6 +13,7 @@ import { fetchByIdMovies } from '../../helpers/api';
 import Error from '../../components/Errors/Errors';
 import styles from './CardView.module.css';
 import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../components/Button/Button';
 const CastView = lazy(() =>
   import(`../CastView` /*webpackChunkName: "CastView "*/),
 );
@@ -22,6 +24,8 @@ const ReviewsView = lazy(() =>
 function CardView() {
   const { url, path } = useRouteMatch();
   const { moviesId } = useParams();
+  const params = useParams();
+  console.log(params);
   const location = useLocation();
   const history = useHistory();
 
@@ -46,16 +50,12 @@ function CardView() {
   }, [moviesId]);
 
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/goit-react-hw-05-movies/');
+    history.push(location?.state?.from ?? '/');
   };
 
   return (
     <>
-      {location.pathname !== '/goit-react-hw-05-movies/' && (
-        <button type="button" onClick={onGoBack}>
-          BACK
-        </button>
-      )}
+      {location.pathname !== '/' && <Button onGoBack={onGoBack}>BACK</Button>}
       <div className={styles.Container}>
         {' '}
         {status === 'resolved' && (
@@ -88,8 +88,7 @@ function CardView() {
                   to={{
                     pathname: `${url}/cast`,
                     state: {
-                      from:
-                        location?.state?.from ?? `/goit-react-hw-05-movies/`,
+                      from: location?.state?.from ?? `/`,
                     },
                   }}
                 >
@@ -101,8 +100,7 @@ function CardView() {
                   to={{
                     pathname: `${url}/reviews`,
                     state: {
-                      from:
-                        location?.state?.from ?? `/goit-react-hw-05-movies/`,
+                      from: location?.state?.from ?? `/`,
                     },
                   }}
                 >
@@ -127,4 +125,5 @@ function CardView() {
     </>
   );
 }
+
 export default CardView;

@@ -16,8 +16,9 @@ function Cast() {
         setStatus('loading');
         const actorsData = await fetchByIdMoviesActors(moviesId);
         setActors([...actorsData.cast]);
+        console.log(actors);
 
-        if (actors.length) {
+        if (actors.length === 0) {
           throw new Error('error Actors');
         }
         setStatus('resolved');

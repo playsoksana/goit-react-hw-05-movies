@@ -4,6 +4,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import Error from '../../components/Errors/Errors';
 import Form from '../../components/Form';
 import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../components/Button/Button';
 
 function MoviesView() {
   const [search, setSearch] = useState('');
@@ -55,16 +56,12 @@ function MoviesView() {
   }
 
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/goit-react-hw-05-movies/');
+    history.push(location?.state?.from ?? '/');
   };
 
   return (
     <>
-      {location.pathname !== '/goit-react-hw-05-movies/' && (
-        <button type="button" onClick={onGoBack}>
-          BACK
-        </button>
-      )}
+      {location.pathname !== '/' && <Button onGoBack={onGoBack}>BACK</Button>}
       <Form onSubmit={onSubmit} />
       <ul>
         {status === 'resolved' &&
@@ -74,7 +71,7 @@ function MoviesView() {
                 <Link
                   key={id}
                   to={{
-                    pathname: `/goit-react-hw-05-movies/movies/${id}`,
+                    pathname: `/movies/${id}`,
                     state: { from: location, label: 'Back to the list' },
                   }}
                 >

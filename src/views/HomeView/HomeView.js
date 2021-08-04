@@ -32,7 +32,7 @@ function HomeView() {
           <ul>
             {listTrendingMovies.map(card => (
               <li key={card.id}>
-                <Link to={`/goit-react-hw-05-movies/movies/${card.id}`}>
+                <Link to={`/movies/${card.id}`}>
                   {card.title ?? card.original_name}
                 </Link>
               </li>

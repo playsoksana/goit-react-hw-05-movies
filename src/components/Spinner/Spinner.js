@@ -5,10 +5,9 @@ import FadeLoader from 'react-spinners/FadeLoader';
 const override = css`
   display: block;
   border-color: red;
-  width: 15px;
-  height: 150px;
+
   color: black;
-  margin: 2px auto;
+  margin: 30px auto;
 `;
 
 function Spinner() {
@@ -17,7 +16,15 @@ function Spinner() {
 
   return (
     <div className="sweet-loading">
-      <FadeLoader color={color} loading={loading} css={override} />
+      <FadeLoader
+        color={color}
+        loading={loading}
+        css={override}
+        height={65}
+        width={10}
+        radius={40}
+        margin={30}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Spinner from '../components/Spinner/Spinner';
 
 const Header = lazy(() =>
@@ -27,18 +27,19 @@ function App() {
 
         <div className="section">
           <Switch>
-            <Route exact path="/goit-react-hw-05-movies/">
+            <Route exact path="/">
               <HomeView />
             </Route>
-            <Route exact path="/goit-react-hw-05-movies/movies">
+            <Route exact path="/movies">
               <MoviesView />
             </Route>
-            <Route path="/goit-react-hw-05-movies/movies/:moviesId">
+            <Route path="/movies/:moviesId">
               <CardView />
             </Route>
-            <Route>
+            <Route path="/404">
               <NotFind />
             </Route>
+            <Redirect to="404" />
           </Switch>
         </div>
       </Suspense>

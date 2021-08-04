@@ -10,7 +10,7 @@ const Header = () => {
         <ul className={styles.List}>
           <li className={styles.Item}>
             <NavLink
-              to="/goit-react-hw-05-movies/"
+              to="/"
               className={styles.Link}
               activeClassName={styles.Active}
               exact
@@ -21,7 +21,7 @@ const Header = () => {
           <li className={styles.Item}>
             <NavLink
               to={{
-                pathname: '/goit-react-hw-05-movies/movies',
+                pathname: '/movies',
                 state: {
                   from: location,
                 },
