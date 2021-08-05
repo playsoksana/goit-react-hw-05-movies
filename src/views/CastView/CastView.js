@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { fetchByIdMoviesActors } from '../../helpers/api';
 import nope from '../../image/nope.jpg';
 import Error from '../../components/Errors/Errors';
+import styles from './Cast.module.css';
 
 function Cast() {
   const { moviesId } = useParams();
@@ -16,7 +17,6 @@ function Cast() {
         setStatus('loading');
         const actorsData = await fetchByIdMoviesActors(moviesId);
         setActors([...actorsData.cast]);
-        console.log(actors);
 
         if (actors.length === 0) {
           throw new Error('error Actors');
@@ -31,10 +31,11 @@ function Cast() {
   return (
     <>
       {status === 'resolved' && (
-        <ul>
+        <ul className={styles.List}>
           {actors.map(({ profile_path, name, character }, index) => (
-            <li key={index}>
+            <li className={styles.Item} key={index}>
               <img
+                className={styles.Image}
                 alt={name ? name : nope}
                 src={
                   profile_path

@@ -1,9 +1,12 @@
-.Container {
+.Cover {
   display: flex;
   margin-bottom: 40px;
   padding: 30px 15px;
 }
 
+.Container {
+  padding: 30px;
+}
 .Image {
   width: 400px;
   height: auto;

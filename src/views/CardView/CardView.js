@@ -24,8 +24,7 @@ const ReviewsView = lazy(() =>
 function CardView() {
   const { url, path } = useRouteMatch();
   const { moviesId } = useParams();
-  const params = useParams();
-  console.log(params);
+
   const location = useLocation();
   const history = useHistory();
 
@@ -60,25 +59,29 @@ function CardView() {
         {' '}
         {status === 'resolved' && (
           <article>
-            <img
-              className={styles.Image}
-              src={`https://image.tmdb.org/t/p/w500/${state.poster_path}`}
-              alt={state.title ? state.title : state.original_name}
-            ></img>
-            <div className={styles.Description}>
-              <h2 className={styles.Name}>
-                {state.title ? state.title : state.original_name} (
-                {state.release_date.slice(0, 4)})
-              </h2>
-              <p className={styles.Title}>
-                User Score:{' '}
-                {state.vote_average ? state.vote_average : 'no user score  yet'}
-              </p>
-              <p className={styles.Title}>
-                Description{' '}
-                {state.overview ? state.overview : 'no description  yet'}
-              </p>
-              <p className={styles.Title}>Genres: {state.genresMovie} </p>
+            <div className={styles.Cover}>
+              <img
+                className={styles.Image}
+                src={`https://image.tmdb.org/t/p/w500/${state.poster_path}`}
+                alt={state.title ? state.title : state.original_name}
+              ></img>
+              <div className={styles.Description}>
+                <h2 className={styles.Name}>
+                  {state.title ? state.title : state.original_name} (
+                  {state.release_date.slice(0, 4)})
+                </h2>
+                <p className={styles.Title}>
+                  User Score:{' '}
+                  {state.vote_average
+                    ? state.vote_average
+                    : 'no user score  yet'}
+                </p>
+                <p className={styles.Title}>
+                  Description{' '}
+                  {state.overview ? state.overview : 'no description  yet'}
+                </p>
+                <p className={styles.Title}>Genres: {state.genresMovie} </p>
+              </div>
             </div>
 
             <h3>Additional information</h3>
